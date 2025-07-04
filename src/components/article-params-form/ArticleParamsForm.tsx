@@ -100,58 +100,52 @@ export const ArticleParamsForm = ({ mainRef }: ArticleParamsFormProps) => {
 	return (
 		<>
 			<ArrowButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
-			{isOpen && (
-				<aside
-					className={
-						isOpen
-							? clsx(styles.container, styles.container_open)
-							: styles.container
-					}
-					ref={rootRef}>
-					<form
-						className={styles.form}
-						onSubmit={handleApply}
-						onReset={handleReset}>
-						<h2 className={styles.title}>Задайте параметры</h2>
-						<Select
-							options={fontFamilyOptions}
-							selected={draftState.fontFamilyOption}
-							onChange={(opt) => handleChange('fontFamilyOption', opt)}
-							title='Шрифт'
-						/>
-						<RadioGroup
-							name='fontSize'
-							options={fontSizeOptions}
-							selected={draftState.fontSizeOption}
-							onChange={(opt) => handleChange('fontSizeOption', opt)}
-							title='Размер шрифта'
-						/>
-						<Select
-							options={fontColors}
-							selected={draftState.fontColor}
-							onChange={(opt) => handleChange('fontColor', opt)}
-							title='Цвет шрифта'
-						/>
-						<Separator />
-						<Select
-							options={backgroundColors}
-							selected={draftState.backgroundColor}
-							onChange={(opt) => handleChange('backgroundColor', opt)}
-							title='Цвет фона'
-						/>
-						<Select
-							options={contentWidthArr}
-							selected={draftState.contentWidth}
-							onChange={(opt) => handleChange('contentWidth', opt)}
-							title='Ширина контента'
-						/>
-						<div className={styles.bottomContainer}>
-							<Button title='Сбросить' htmlType='reset' type='clear' />
-							<Button title='Применить' htmlType='submit' type='apply' />
-						</div>
-					</form>
-				</aside>
-			)}
+			<aside
+				className={clsx(styles.container, { [styles.container_open]: isOpen })}
+				ref={rootRef}>
+				<form
+					className={styles.form}
+					onSubmit={handleApply}
+					onReset={handleReset}>
+					<h2 className={styles.title}>Задайте параметры</h2>
+					<Select
+						options={fontFamilyOptions}
+						selected={draftState.fontFamilyOption}
+						onChange={(opt) => handleChange('fontFamilyOption', opt)}
+						title='Шрифт'
+					/>
+					<RadioGroup
+						name='fontSize'
+						options={fontSizeOptions}
+						selected={draftState.fontSizeOption}
+						onChange={(opt) => handleChange('fontSizeOption', opt)}
+						title='Размер шрифта'
+					/>
+					<Select
+						options={fontColors}
+						selected={draftState.fontColor}
+						onChange={(opt) => handleChange('fontColor', opt)}
+						title='Цвет шрифта'
+					/>
+					<Separator />
+					<Select
+						options={backgroundColors}
+						selected={draftState.backgroundColor}
+						onChange={(opt) => handleChange('backgroundColor', opt)}
+						title='Цвет фона'
+					/>
+					<Select
+						options={contentWidthArr}
+						selected={draftState.contentWidth}
+						onChange={(opt) => handleChange('contentWidth', opt)}
+						title='Ширина контента'
+					/>
+					<div className={styles.bottomContainer}>
+						<Button title='Сбросить' htmlType='reset' type='clear' />
+						<Button title='Применить' htmlType='submit' type='apply' />
+					</div>
+				</form>
+			</aside>
 		</>
 	);
 };
