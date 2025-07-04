@@ -3,7 +3,7 @@
 	left: 0;
 	width: 616px;
 	height: 100%;
-	overflow: scroll;
+	overflow: auto;
 	transform: translate(-616px);
 	transition: transform 0.5s ease;
 }
@@ -29,4 +29,16 @@
 	display: flex;
 	justify-content: space-between;
 	margin-top: auto;
+}
+
+.title {
+	font-weight: 800;
+	font-size: 31px;
+	text-transform: uppercase;
+	font-family: "Open Sans", sans-serif;
+	margin-bottom: 50px;
+}
+
+.form > div:not(:last-child) {
+	margin-bottom: 50px;
 }
