@@ -25,14 +25,14 @@ type ArticleParamsFormProps = {
 };
 
 export const ArticleParamsForm = ({ mainRef }: ArticleParamsFormProps) => {
-	const [isOpen, setIsOpen] = useState(false);
+	const [isMenuOpen, setIsMenuOpen] = useState(false);
 
 	const [initialState] = useState<ArticleStateType>(defaultArticleState);
 	const [draftState, setDraftState] =
 		useState<ArticleStateType>(defaultArticleState);
 
 	useEffect(() => {
-		if (isOpen && mainRef.current) {
+		if (isMenuOpen && mainRef.current) {
 			setDraftState({
 				fontFamilyOption: getCurrentOption(fontFamilyOptions, '--font-family'),
 				fontColor: getCurrentOption(fontColors, '--font-color'),
@@ -41,7 +41,7 @@ export const ArticleParamsForm = ({ mainRef }: ArticleParamsFormProps) => {
 				fontSizeOption: getCurrentOption(fontSizeOptions, '--font-size'),
 			});
 		}
-	}, [isOpen]);
+	}, [isMenuOpen]);
 
 	function getCurrentOption(options: OptionType[], cssVar: string): OptionType {
 		if (!mainRef.current) return options[0];
@@ -54,14 +54,14 @@ export const ArticleParamsForm = ({ mainRef }: ArticleParamsFormProps) => {
 	const handleApply = (e: React.FormEvent) => {
 		e.preventDefault();
 		setCssVars(draftState);
-		setIsOpen(false);
+		setIsMenuOpen(false);
 	};
 
 	const handleReset = (e: React.FormEvent) => {
 		e.preventDefault();
 		setDraftState(initialState);
 		setCssVars(initialState);
-		setIsOpen(false);
+		setIsMenuOpen(false);
 	};
 
 	function setCssVars(state: ArticleStateType) {
@@ -91,17 +91,17 @@ export const ArticleParamsForm = ({ mainRef }: ArticleParamsFormProps) => {
 
 	const rootRef = useRef<HTMLDivElement>(null);
 	useOutsideClickClose({
-		isOpen,
+		isOpen: isMenuOpen,
 		rootRef,
-		onClose: () => setIsOpen(false),
-		onChange: () => setIsOpen(false),
+		onClose: () => setIsMenuOpen(false),
+		onChange: () => setIsMenuOpen(false),
 	});
 
 	return (
 		<>
-			<ArrowButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />
+			<ArrowButton isOpen={isMenuOpen} onClick={() => setIsMenuOpen(!isMenuOpen)} />
 			<aside
-				className={clsx(styles.container, { [styles.container_open]: isOpen })}
+				className={clsx(styles.container, { [styles.container_open]: isMenuOpen })}
 				ref={rootRef}>
 				<form
 					className={styles.form}
